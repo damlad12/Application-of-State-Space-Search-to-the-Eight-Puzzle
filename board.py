@@ -5,10 +5,7 @@
 # name: Damla Duendar
 # email: damlad@bu.edu
 #
-# If you worked with a partner, put their contact info below:
-# partner's name:
-# partner's email:
-#
+
 
 # a 2-D list that corresponds to the tiles in the goal state
 GOAL_TILES = [['0', '1', '2'],
@@ -34,8 +31,6 @@ class Board:
         self.blank_c = -1
         
         
-        # Put your code for the rest of __init__ below.
-        # Do *NOT* remove our code above.
         for r in range(len(digitstr)//3):
             for c in range(len(digitstr)//3):
                 self.tiles[r][c] = digitstr[3*r+c]
@@ -44,7 +39,7 @@ class Board:
                     self.blank_c = c
     
             
-    ### Add your other method definitions below. ###
+ 
     def __repr__(self):
         """returns a string representation of a Board object where each tile is represented 
         by the appropriate single-character string followed by a single space and the blank cell 
