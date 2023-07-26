@@ -1,4 +1,3 @@
-#
 # state.py (Final project)
 #
 # A State class for the Eight Puzzle
@@ -60,7 +59,17 @@ class State:
                 successors += [successor]
         return successors
         
-    
+    def print_moves_to(self):
+        """prints the sequence of moves that lead from the initial state to the called State object
+        (i.e., to self).""",
+        if self.predecessor == None:
+            print('initial state:')
+            print(self.board)
+        else:
+            self.predecessor.print_moves_to()
+            print ('move the blank', self.move + ':')
+            print(self.board)
+
         
     def __repr__(self):
         """ returns a string representation of the State object
@@ -95,3 +104,4 @@ class State:
         """
         # You should *NOT* change this method.
         return True
+
