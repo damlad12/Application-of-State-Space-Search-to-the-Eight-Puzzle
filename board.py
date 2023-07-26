@@ -107,7 +107,6 @@ class Board:
         return string_digits
         
     
-    
     def copy(self):
         """returns a newly-constructed Board object that is a deep copy of the called 
         object (i.e., of the object represented by self)."""
@@ -128,3 +127,69 @@ class Board:
         """returns True if the called object (self) and the argument 
         (other) have the same values for the tiles attribute, and False otherwise."""
         return self.tiles == other.tiles
+
+    def empty_final(self):
+        return self.blank_r + self.blank_c
+    
+    def new_misplaced(self):
+        blank_row = ''
+        for r in range(3):
+            for c in range(3):
+                if self.digit_string()[3*r+c] == '0':
+                    if  r>0:
+                        if self.copy().tiles[1][c]== '0':
+                            self.copy().tiles[1][c] = self.copy().tiles[0][c]
+                            self.copy().tiles[0][c] ='0'
+                            blank_row = '0'
+                        else:
+                            self.copy().tiles[2][c] = self.copy().tiles[1][c]
+                            self.copy().tiles[1][c] = self.copy().tiles[0][c]
+                            self.copy().tiles[0][c] = '0'
+                            blank_row = '0'
+                            
+                    if  3*r+c == 0:
+                        break
+                    
+                    if blank_row== '0' or r == 0:
+                            if self.copy().tiles[0][1]== '0':
+                                self.copy().tiles[0][1]= self.copy().tiles[0][0]
+                                self.copy().tiles[0][0]= '0'
+                                break
+                            if self.copy().tiles[0][2] == '0':
+                                self.copy().tiles[0][2] = self.copy().tiles[0][1]
+                                self.copy().tiles[0][1] = self.copy().tiles[0][0]
+                                self.copy().tiles[0][0]= '0'
+                                break
+        
+        return self.copy().num_misplaced()
+    
+    def distance_to_final(self):
+        """computes the distance between the current location of the tiles in the board and their final 
+        location"""
+        distance = 0
+
+        for r in range(3):
+             for c in range(3):
+               if self.tiles[r][c] != 0 and self.tiles[r][c] != GOAL_TILES[r][c]:
+                   if self.tiles[r][c] == '1':
+                      distance +=  abs(r-0) + abs(c-1)
+                   if self.tiles[r][c] == '2':
+                       distance += abs(r-0) + abs(c-2)
+                   if self.tiles[r][c] == '3':
+                       distance += abs(r-1) + abs(c-0)
+                   if self.tiles[r][c] == '4':
+                       distance += abs(r-1) + abs(c-1)
+                   if self.tiles[r][c] == '5':
+                       distance += abs(r-1) + abs(c-2)
+                   if self.tiles[r][c] == '6':
+                       distance += abs(r-2) + abs(c-0)
+                   if self.tiles[r][c] == '7':
+                       distance += abs(r-2) + abs(c-1)
+                   if self.tiles[r][c] == '8':
+                       distance += abs(r-2) + abs(c-2)
+                       
+        return distance
+                       
+    
+ 
+                  
