@@ -1,0 +1,99 @@
+Name: Damla Duendar
+Email:damlad@bu.edu
+
+
+puzzles with 5-move optimal solutions
+-------------------------------------
+algorithm                num. solved    avg. moves    avg. states tested
+------------------------------------------------------------------------
+random                       10             5.6              132.4
+BFS                          10             5.0              47.1
+DFS (depth limit 20)         10             16.2             19072.7         
+DFS (depth limit 50)         10             48.2             49043.0
+Greedy Search (using h1)     10             5.4              70.3
+A* (using h1)                10             5.0              6.5
+
+
+puzzles with 10-move optimal solutions
+-------------------------------------
+algorithm                num. solved    avg. moves    avg. states tested
+------------------------------------------------------------------------
+random                       10             12.4             6795.9
+BFS                          10             10.0.            747.4 
+DFS (depth limit 20)         10             18.8             24858.0     
+DFS (depth limit 50)         10             49.2             92287.3 
+Greedy Search (using h1)     9              85.55            3343.66
+A* (using h1)                10             10.0             27.3
+
+puzzles with 15-move optimal solutions
+-------------------------------------
+algorithm                num. solved    avg. moves    avg. states tested
+------------------------------------------------------------------------
+random                       8              16.75            8164.25
+BFS                          10             15.0             12672.0
+DFS (depth limit 20)         10             17.8             68659.0
+DFS (depth limit 50)         9              48.55            70523.11                           
+Greedy Search (using h1)     6              90.33            2718.0
+A* (using h1)                10             15.0             313.8
+
+The tests were conducted within a one minute time limit for each of the puzzles in the files. Within this time limit, some of the algorithms did not solve all of the puzzles, thus these algorithms are not complete within this limitation. These algorithms were Greedy Search used for the 10-move optimal solution puzzles, and random, DFS(depth limit 50) and Greedy Search when used for the puzzles with 15- move optimal solutions. Moreover, A* and BFS were the algorithms that provided the optimal solutions. However, the average states tested by A* were far less than those tested by BFS. This means that if the number of moves for the optimal solution is increased, then BFS may require much longer than A*. 
+
+heuristic h2
+------------
+This heuristic computes the minimum number of moves needed by each of the numbered tiles (independently of the movements of the other tiles) to end up at their position in the goal state from their positions in the current state. This heuristic is one way to represent the minimum number of moves of the blank tile since the blank needs to first occupy the tile it wishes to place in its position. In order to avoid overestimation, the number of moves needed by the blank tile to reach its final position is ignored. 
+
+
+
+puzzles with 18-move optimal solutions
+--------------------------------------
+algorithm              num. solved    avg. moves    avg. states tested
+----------------------------------------------------------------------
+Greedy (heuristic h1)       8            145.75           8345.75
+Greedy (heuristic h2)       10           76.2             725.7
+# Greedy with any other heuristics
+
+A* (heuristic h1)           10           18.0             1602.0
+A* (heuristic h2)           10           18.0             239.3
+# Greedy with any other heuristics
+
+
+puzzles with 21-move optimal solutions
+--------------------------------------
+algorithm              num. solved    avg. moves    avg. states tested
+----------------------------------------------------------------------
+Greedy (heuristic h1)        5           104.6             4172.6
+Greedy (heuristic h2)        10          75.4              370.7
+# Greedy with any other heuristics
+
+A* (heuristic h1)            10          21.0              6301.7
+A* (heuristic h2)            10          21.0              482.3
+# Greedy with any other heuristics
+
+
+puzzles with 24-move optimal solutions
+--------------------------------------
+algorithm              num. solved    avg. moves    avg. states tested
+----------------------------------------------------------------------
+Greedy (heuristic h1)      6              123.66            2856.16             
+Greedy (heuristic h2)      10             75.2              593.3
+# Greedy with any other heuristics
+
+A* (heuristic h1)          2              24.0              25020.0
+A* (heuristic h2)          10             24.0              1065.5
+# Greedy with any other heuristics
+
+
+puzzles with 27-move optimal solutions
+--------------------------------------
+algorithm              num. solved    avg. moves    avg. states tested
+----------------------------------------------------------------------
+Greedy (heuristic h1)      4               197.5             4285.5
+Greedy (heuristic h2)      10              90.8              639.9
+# Greedy with any other heuristics
+
+A* (heuristic h1)          0               ----              -------
+A* (heuristic h2)          10              27.0              5043.0
+# Greedy with any other heuristics
+
+
+Both Greedy and A* tested less states on average with h2. Greedy provided solutions with less average moves with h2. Because A* still provide the optimal number of moves, this means that heuristic h2 is an admissible heuristic. The number of average states tested decreased for A*. This heuristic provides a much better estimation of the priority as can be deduced from the decrease in the average tested states of Greedy. However, Greedy searcher is still not able to find all of the solutions with the optimal number of moves. This is because it does not consider the cost associated with arriving at a state. So, it cannot consider the possibility of going back to one of the previous untested states ( which could have had a greater priority if cost associated with num_moves was included in the calculation) and follow its branching. However, this also means that it is much faster than A* for tests with h1 with solutions for 24 and 27 move optimal solutions. Within the same time limit of approximately 1 minute per solution and for solutions with  21 or 18 optimal solutions, A* performs much faster because with a smaller number of moves, A* finds more solutions within the same depth as Greedy, but this also makes A* much slower when number of optimal moves increase. This is comparable to how BFS and DFS look for solutions. 
